@@ -3,6 +3,7 @@
 import { useAuth } from "@/contexts/AuthContexts";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import MainLayout from "./layout/MainLayout";
 export default function ProtectedLayout({
   children,
 }: {
@@ -19,5 +20,5 @@ export default function ProtectedLayout({
 
   if (isLoading) return <p>Loading...</p>;
 
-  return <>{children}</>;
+  return <MainLayout>{children}</MainLayout>;
 }
