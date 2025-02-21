@@ -1,23 +1,40 @@
 "use client";
 import { createContext, use, useEffect, useState } from "react";
-import { getToken, removeToken, setToken } from "../lib/auth";
+import {
+  getToken,
+  getUserInfo,
+  removeTokenAndInfo,
+  setToken,
+  setUserInfo,
+} from "../lib/auth";
 
 interface AuthContextType {
   token: string | null;
   loginHandler: (token: string) => void;
   logoutHandler: () => void;
   isLoading: boolean;
+  user: UserProps | null;
+  userHandler: (user: UserProps) => void;
+}
+
+export interface UserProps {
+  id: number;
+  name: string;
+  email: string;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setAuthToken] = useState<string | null>(null);
+  const [user, setUser] = useState<UserProps | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = getToken();
+    const storedUser = getUserInfo();
     if (storedToken) setAuthToken(storedToken);
+    if (storedUser) setUser(storedUser);
     setIsLoading(false);
   }, []);
 
@@ -28,12 +45,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const logoutHandler = () => {
     setAuthToken(null);
-    removeToken();
+    setUser(null);
+    removeTokenAndInfo();
+  };
+
+  const userHandler = (newUser: UserProps) => {
+    setUser(newUser);
+    setUserInfo(newUser);
   };
 
   return (
     <AuthContext.Provider
-      value={{ token, loginHandler, logoutHandler, isLoading }}
+      value={{
+        token,
+        loginHandler,
+        logoutHandler,
+        userHandler,
+        user,
+        isLoading,
+      }}
     >
       {children}
     </AuthContext.Provider>

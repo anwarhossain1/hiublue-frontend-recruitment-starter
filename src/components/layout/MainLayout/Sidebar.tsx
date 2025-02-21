@@ -40,7 +40,7 @@ export default function Sidebar({
   mobileOpen,
   handleDrawerToggle,
 }: SidebarProps) {
-  const pathname = usePathname(); // Get the current route
+  const pathname = usePathname();
 
   const drawerContent = (
     <Box sx={{ width: drawerWidth }}>
@@ -91,13 +91,19 @@ export default function Sidebar({
                 <ListItem disablePadding>
                   <ListItemButton
                     sx={{
-                      bgcolor: isActive ? "primary.main" : "transparent",
+                      bgcolor: isActive ? "primary.light" : "transparent",
                       color: isActive ? "white" : "inherit",
                       "&:hover": { bgcolor: "primary.light" },
                     }}
                   >
                     <ListItemIcon
-                      sx={{ color: isActive ? "white" : "inherit" }}
+                      sx={{
+                        minWidth: "32px",
+                        "& svg": {
+                          fontSize: "20px",
+                        },
+                        color: isActive ? "white" : "inherit",
+                      }}
                     >
                       {item.icon}
                     </ListItemIcon>
@@ -118,7 +124,6 @@ export default function Sidebar({
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
     >
-      {/* Mobile Sidebar */}
       <Drawer
         variant="temporary"
         open={mobileOpen}
@@ -131,8 +136,6 @@ export default function Sidebar({
       >
         {drawerContent}
       </Drawer>
-
-      {/* Permanent Sidebar */}
       <Drawer
         variant="permanent"
         sx={{

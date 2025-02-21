@@ -1,5 +1,6 @@
+import AccountInfoWithAvatar from "@/components/AccountInfoWithAvatar";
 import MenuIcon from "@mui/icons-material/Menu";
-import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Stack, Toolbar } from "@mui/material";
 
 interface NavbarProps {
   drawerWidth: number;
@@ -16,18 +17,25 @@ const Navbar: React.FC<NavbarProps> = ({ drawerWidth, handleDrawerToggle }) => {
       }}
     >
       <Toolbar>
-        {/* Hamburger Icon for Mobile */}
-        <IconButton
-          color="inherit"
-          edge="start"
-          onClick={handleDrawerToggle}
-          sx={{ display: { sm: "none" }, mr: 2 }}
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ flexGrow: 1 }}
+          alignItems="center"
+          justifyContent={"space-between"}
         >
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          My Dashboard
-        </Typography>
+          <Box>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ display: { sm: "none" }, mr: 2, color: "primary.main" }}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
+          <AccountInfoWithAvatar />
+        </Stack>
       </Toolbar>
     </AppBar>
   );

@@ -68,7 +68,7 @@ interface SignInFormInputs {
 export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  const { loginHandler } = useAuth();
+  const { loginHandler, userHandler } = useAuth();
   const router = useRouter();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -112,6 +112,8 @@ export default function SignIn() {
         const responseData = await response.json();
         if (responseData.token) {
           loginHandler(responseData.token);
+          userHandler(responseData.user);
+          console.log(responseData);
           router.push("/");
         }
         console.log(responseData);
