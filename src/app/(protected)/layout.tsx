@@ -1,3 +1,4 @@
+import ProtectedLayout from "@/components/ProtectedLayout";
 import { AuthProvider } from "@/contexts/AuthContexts";
 import ThemeProvider from "@/theme/index";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
@@ -13,9 +14,11 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider>
             <AuthProvider>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CssBaseline />
-              {props.children}
+              <ProtectedLayout>
+                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+                <CssBaseline />
+                {props.children}
+              </ProtectedLayout>
             </AuthProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>

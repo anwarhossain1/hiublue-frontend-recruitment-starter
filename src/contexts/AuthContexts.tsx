@@ -6,16 +6,19 @@ interface AuthContextType {
   token: string | null;
   loginHandler: (token: string) => void;
   logoutHandler: () => void;
+  isLoading: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setAuthToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const storedToken = getToken();
     if (storedToken) setAuthToken(storedToken);
+    setIsLoading(false);
   }, []);
 
   const loginHandler = (newToken: string) => {
@@ -29,7 +32,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ token, loginHandler, logoutHandler }}>
+    <AuthContext.Provider
+      value={{ token, loginHandler, logoutHandler, isLoading }}
+    >
       {children}
     </AuthContext.Provider>
   );
