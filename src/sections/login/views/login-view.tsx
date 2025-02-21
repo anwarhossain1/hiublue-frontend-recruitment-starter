@@ -1,6 +1,7 @@
 "use client";
 
 import { API_ROUTES } from "@/constants/apiRoutes";
+import { useAuth } from "@/contexts/AuthContexts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -20,6 +21,7 @@ import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -66,6 +68,8 @@ interface SignInFormInputs {
 export default function SignIn() {
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const { loginHandler } = useAuth();
+  const router = useRouter();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleMouseDownPassword = (
@@ -106,6 +110,10 @@ export default function SignIn() {
         });
       } else {
         const responseData = await response.json();
+        if (responseData.token) {
+          loginHandler(responseData.token);
+          router.push("/");
+        }
         console.log(responseData);
       }
     } catch (error) {
