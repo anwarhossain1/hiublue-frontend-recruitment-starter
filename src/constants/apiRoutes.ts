@@ -8,4 +8,7 @@ export const API_ROUTES = {
   ONBOARDING: {
     POST: `${process.env.NEXT_PUBLIC_BASE_URL}/offers`,
   },
+  USERS: {
+    GET: `${process.env.NEXT_PUBLIC_BASE_URL}/users`,
+  },
 };

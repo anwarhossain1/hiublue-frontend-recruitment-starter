@@ -5,7 +5,6 @@ import CustomRadioGroup from "@/components/ui/CustomRadioGroup";
 import { API_ROUTES } from "@/constants/apiRoutes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-  Autocomplete,
   Box,
   Button,
   Divider,
@@ -13,7 +12,6 @@ import {
   OutlinedInput,
   Paper,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -24,11 +22,7 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as yup from "yup";
-const users = [
-  { label: "John Doe", id: 1 },
-  { label: "Jane Smith", id: 2 },
-  { label: "Alice Johnson", id: 3 },
-];
+import UserSelection from "../UserSelection";
 const schema = yup.object().shape({
   plan_type: yup.string().required("Plan type is required"),
   additions: yup
@@ -36,7 +30,7 @@ const schema = yup.object().shape({
     .of(yup.string())
     .min(1, "At least one addition is required"),
   user: yup.object().shape({
-    label: yup.string().required("User selection is required"),
+    name: yup.string().required("User selection is required"),
     id: yup.number().required(),
   }),
   expired: yup.date().required("Expiration date is required"),
@@ -152,20 +146,10 @@ export default function OnboardingView() {
           <Controller
             name="user"
             control={control}
-            render={({ field }) => (
-              <Autocomplete
-                {...field}
-                options={users}
-                getOptionLabel={(option) => option.label || ""}
-                renderInput={(params) => (
-                  <TextField {...params} error={!!errors.user} />
-                )}
-                onChange={(_, data) => field.onChange(data)}
-              />
-            )}
+            render={({ field }) => <UserSelection field={field} />}
           />
           {errors.user && (
-            <p style={{ color: "red" }}>{errors.user.label?.message}</p>
+            <p style={{ color: "red" }}>{errors.user.name?.message}</p>
           )}
           <Typography variant="subtitle2" fontWeight={"bold"} mt={2} mb={1}>
             Expired Date
