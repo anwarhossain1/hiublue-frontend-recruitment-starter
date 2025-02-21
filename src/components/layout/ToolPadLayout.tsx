@@ -1,15 +1,17 @@
 import { AppProvider, DashboardLayout, Navigation } from "@toolpad/core";
+import { useRouter } from "next/navigation";
 import DashboardIconSVG from "../svg-icons/DashboardIconSVG";
 import OnboardingIconSVG from "../svg-icons/OnboardingIconSVG";
+
 const NAVIGATION: Navigation = [
   {
     kind: "header",
     title: "Overview",
   },
   {
-    segment: "dashboard",
     title: "Dashboard",
     icon: <DashboardIconSVG />,
+    pattern: "/",
   },
   {
     segment: "onboarding",
@@ -18,7 +20,8 @@ const NAVIGATION: Navigation = [
   },
 ];
 
-const MainLayout = ({ children }: { children: React.ReactNode }) => {
+const ToolPadLayout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -27,10 +30,11 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         homeUrl: "/",
         title: "",
       }}
+      //   router={router}
     >
       <DashboardLayout>{children}</DashboardLayout>
     </AppProvider>
   );
 };
 
-export default MainLayout;
+export default ToolPadLayout;
