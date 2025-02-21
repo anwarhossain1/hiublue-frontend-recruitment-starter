@@ -2,16 +2,17 @@
 
 import CustomCheckboxGroup from "@/components/ui/CustomCheckboxGroup";
 import CustomRadioGroup from "@/components/ui/CustomRadioGroup";
+import { API_ROUTES } from "@/constants/apiRoutes";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Autocomplete,
   Box,
   Button,
   Divider,
-  FormLabel,
   InputAdornment,
   OutlinedInput,
   Paper,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -19,7 +20,9 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import * as yup from "yup";
 const users = [
   { label: "John Doe", id: 1 },
@@ -30,8 +33,8 @@ const schema = yup.object().shape({
   plan_type: yup.string().required("Plan type is required"),
   additions: yup
     .array()
-    .of(yup.string().required("Addition is required"))
-    .required("At least one addition is required"),
+    .of(yup.string())
+    .min(1, "At least one addition is required"),
   user: yup.object().shape({
     label: yup.string().required("User selection is required"),
     id: yup.number().required(),
@@ -56,11 +59,31 @@ export default function OnboardingView() {
       additions: [],
       user: undefined,
       expired: undefined,
-      price: 0,
+      price: undefined,
     },
   });
+  const [isLoading, setIsLoading] = useState(false);
   const onSubmit = async (data: any) => {
-    console.log("Form Data:", data);
+    setIsLoading(true);
+    try {
+      const postData = await fetch(API_ROUTES.ONBOARDING.POST, {
+        method: "POST",
+        body: JSON.stringify({ ...data, user_id: data.user.id }),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+      const post = await postData.json();
+      setIsLoading(false);
+      if (post.data) {
+        toast.success(post.message);
+      } else {
+        console.error("Failed to create offer");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   const planOptions = [
     { label: "Pay as you go", value: "pay_as_you_go" },
@@ -120,8 +143,9 @@ export default function OnboardingView() {
               />
             )}
           />
-
-          {/* User - Autocomplete */}
+          {errors.additions && (
+            <p style={{ color: "red" }}>{errors.additions.message}</p>
+          )}
           <Typography variant="subtitle2" fontWeight={"bold"} mt={2} mb={1}>
             User
           </Typography>
@@ -143,11 +167,9 @@ export default function OnboardingView() {
           {errors.user && (
             <p style={{ color: "red" }}>{errors.user.label?.message}</p>
           )}
-
-          {/* Expired Date - Date Picker */}
-          <FormLabel component="legend" sx={{ mt: 2 }}>
+          <Typography variant="subtitle2" fontWeight={"bold"} mt={2} mb={1}>
             Expired Date
-          </FormLabel>
+          </Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <Controller
               name="expired"
@@ -196,13 +218,24 @@ export default function OnboardingView() {
           {errors.price && (
             <p style={{ color: "red" }}>{errors.price.message}</p>
           )}
-
-          {/* Submit Button */}
-          <Button type="submit" variant="contained" sx={{ mt: 3 }} fullWidth>
-            Submit
-          </Button>
         </Box>
       </Paper>
+      <Stack
+        direction="row"
+        spacing={2}
+        mt={2}
+        alignItems={"center"}
+        justifyContent={"flex-end"}
+      >
+        <Button
+          loading={isLoading}
+          type="submit"
+          variant="contained"
+          sx={{ mt: 3, backgroundColor: "primary.main" }}
+        >
+          Submit
+        </Button>
+      </Stack>
     </form>
   );
 }
