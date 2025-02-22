@@ -42,7 +42,7 @@ const OffersTable = ({ data }) => {
                 //   align={column.align}
                 style={{ minWidth: column.minWidth }}
               >
-                {column.label}
+                {column.id === "actions" ? "" : column.label}
               </TableCell>
             ))}
           </TableRow>
