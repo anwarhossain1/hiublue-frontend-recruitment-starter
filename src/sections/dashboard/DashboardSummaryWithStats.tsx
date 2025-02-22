@@ -4,6 +4,7 @@ import { Box, Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import OffersSent from "./OffersSent";
 import StatCard from "./views/StatCard";
+import WebsiteVisit from "./WebsiteVisit";
 
 const fetchDashboardSummary = async (filterBy: string | number) => {
   const response = await fetch(
@@ -115,7 +116,7 @@ const DashboardSummaryWithStats = () => {
           )}
         </Grid2>
         <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
-          {websiteVisits && <Typography>Website visit</Typography>}
+          {websiteVisits && <WebsiteVisit data={websiteVisits} />}
         </Grid2>
         <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
           {offersSent && <OffersSent data={offersSent} />}

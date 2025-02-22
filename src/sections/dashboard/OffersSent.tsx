@@ -1,4 +1,4 @@
-import { Paper } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import * as React from "react";
 import Chart from "react-apexcharts";
 
@@ -36,6 +36,8 @@ const OffersSent: React.FC<OffersSentProps> = ({ data }) => {
     xaxis: {
       categories: formattedData.map((item) => item.day),
     },
+    colors: ["#1C252E"],
+
     responsive: [
       {
         breakpoint: 600,
@@ -58,11 +60,14 @@ const OffersSent: React.FC<OffersSentProps> = ({ data }) => {
 
   return (
     <Paper elevation={3} sx={{ width: "100%", overflow: "hidden" }}>
+      <Typography pl={3} pt={3} variant="h6">
+        Offers sent
+      </Typography>
       <Chart
         options={options}
         series={series}
         type="line"
-        height={300}
+        height={400}
         width="100%"
       />
     </Paper>
