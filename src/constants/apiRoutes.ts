@@ -12,4 +12,7 @@ export const API_ROUTES = {
   USERS: {
     GET: `${process.env.NEXT_PUBLIC_BASE_URL}/users`,
   },
+  OFFERS: {
+    GET: `${process.env.NEXT_PUBLIC_BASE_URL}/offers`,
+  },
 };

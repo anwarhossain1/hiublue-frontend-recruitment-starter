@@ -34,7 +34,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
           labelId={`-select-label`}
           id={`select`}
           value={String(value)}
-          //   label={label}
+          label={label ? label : null}
           onChange={handleChange}
         >
           {options.map((option) => (
