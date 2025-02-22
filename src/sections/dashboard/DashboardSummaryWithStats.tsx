@@ -35,7 +35,7 @@ const fetchDashboardStat = async (filterBy: string | number) => {
     }
   );
   const data = await response.json();
-  console.log("stat", data);
+
   return data;
 };
 
@@ -71,7 +71,6 @@ const DashboardSummaryWithStats = () => {
         setOffersSent(data.offers_sent);
         setWebsiteVisits(data.website_visits);
       }
-      console.log(data);
     } catch (error) {
       console.error("Failed to fetch dashboard summary:", error);
     }

@@ -32,6 +32,9 @@ const OffersSent: React.FC<OffersSentProps> = ({ data }) => {
       toolbar: {
         show: false,
       },
+      zoom: {
+        enabled: false,
+      },
     },
     xaxis: {
       categories: formattedData.map((item) => item.day),
