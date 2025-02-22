@@ -22,7 +22,7 @@ const tableHeadColumns = [
   { id: "actions", label: "Actions", minWidth: 150 },
 ];
 
-const OffersTable = ({ data }) => {
+const OffersTable = ({ data }: { data: any }) => {
   const getColor = (status: string) => {
     if (status === "accepted") {
       return "success";
@@ -55,7 +55,7 @@ const OffersTable = ({ data }) => {
               </TableCell>
             </TableRow>
           ) : (
-            data.map((row) => {
+            data.map((row: any) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {tableHeadColumns.map((column) => {
