@@ -20,6 +20,7 @@
     "@mui/material-nextjs": "next",
     "@mui/x-date-pickers": "^7.27.0",
     "@toolpad/core": "^0.12.0",
+    "apexcharts": "^4.5.0",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "next": "^15.0.0",
