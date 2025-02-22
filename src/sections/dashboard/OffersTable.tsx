@@ -32,7 +32,7 @@ const OffersTable = ({ data }: { data: any }) => {
     return "error";
   };
   return (
-    <TableContainer>
+    <TableContainer sx={{ minHeight: "50vh" }}>
       <Table>
         <TableHead>
           <TableRow>

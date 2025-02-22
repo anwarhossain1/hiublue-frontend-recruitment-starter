@@ -1,34 +1,72 @@
-import * as React from 'react';
-import Chart from 'react-apexcharts';
+import { Paper } from "@mui/material";
+import * as React from "react";
+import Chart from "react-apexcharts";
 
-const data = [
-  { day: 'Monday', value: 45 },
-  { day: 'Tuesday', value: 65 },
-  { day: 'Wednesday', value: 85 },
-  { day: 'Thursday', value: 55 },
-  { day: 'Friday', value: 95 },
-  { day: 'Saturday', value: 75 },
-  { day: 'Sunday', value: 80 },
-];
-
-const options = {
-  chart: {
-    type: 'line',
-  },
-  xaxis: {
-    categories: data.map(item => item.day),
-  },
+type DataObject = {
+  [key: string]: number;
 };
 
-const series = [
-  {
-    name: 'Value',
-    data: data.map(item => item.value),
-  },
-];
+type OffersSentProps = {
+  data: DataObject;
+};
 
-const OffersSent = () => {
-  return <Chart options={options} series={series} type="line" height={350} />;
+const OffersSent: React.FC<OffersSentProps> = ({ data }) => {
+  const dayOrder = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const formattedData = dayOrder.map((day) => ({
+    day,
+    value: data[day.toLowerCase()] || 0,
+  }));
+
+  const options = {
+    chart: {
+      type: "line" as "line",
+      toolbar: {
+        show: false,
+      },
+    },
+    xaxis: {
+      categories: formattedData.map((item) => item.day),
+    },
+    responsive: [
+      {
+        breakpoint: 600,
+        options: {
+          chart: {
+            height: 250,
+            width: "100%",
+          },
+        },
+      },
+    ],
+  };
+
+  const series = [
+    {
+      name: "Value",
+      data: formattedData.map((item) => item.value),
+    },
+  ];
+
+  return (
+    <Paper elevation={3} sx={{ width: "100%", overflow: "hidden" }}>
+      <Chart
+        options={options}
+        series={series}
+        type="line"
+        height={300}
+        width="100%"
+      />
+    </Paper>
+  );
 };
 
 export default OffersSent;

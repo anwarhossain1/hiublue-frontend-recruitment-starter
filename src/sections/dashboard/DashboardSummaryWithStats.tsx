@@ -2,6 +2,7 @@ import CustomSelect from "@/components/ui/CustomSelect";
 import { API_ROUTES } from "@/constants/apiRoutes";
 import { Box, Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import OffersSent from "./OffersSent";
 import StatCard from "./views/StatCard";
 
 const fetchDashboardSummary = async (filterBy: string | number) => {
@@ -116,8 +117,8 @@ const DashboardSummaryWithStats = () => {
         <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
           {websiteVisits && <Typography>Website visit</Typography>}
         </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
-          {offersSent && <Typography>Offers sent</Typography>}
+        <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+          {offersSent && <OffersSent data={offersSent} />}
         </Grid2>
       </Grid2>
     </Box>
