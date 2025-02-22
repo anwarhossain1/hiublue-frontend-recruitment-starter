@@ -1,103 +1,63 @@
-## **Overview**
+# Dashboard Summary with Stats
 
-First of all, congratulations on being shortlisted for the Frontend Developer position at hiublue! 🎉 As part of the selection process, we have designed a challenge to assess your skills in **Next.js, TypeScript, MUI, API handling, code structure and frontend architecture**.
+This is a React-based dashboard summary component using Material UI that fetches and displays statistics, offers sent, and website visits.
 
-You will be provided with a **starter repository** that includes the basic project setup. Your task is to build a functional admin portal with authentication, data visualization on dashboard, basic onboarding offer functionality while integrating API.
+## Features
 
-We are providing:
+- Displays total active users, clicks, and appearances.
+- Provides a dropdown filter for selecting time ranges (this week, previous week).
+- Shows website visit statistics and offers sent.
+- Uses MUI `Grid` for layout and `Table` for structured data presentation.
+- Uses Apex charts for data visualizations.
+- Implements responsive and scrollable table with a formatted number display (e.g., `1k` for `1000`).
 
-- [**Figma design link**](https://www.figma.com/design/p4aO5zxiLUkws5DDTTWP92/Untitled?node-id=0-1&t=oePPLG5LIUguMtQy-1)
-- [**Postman collection**](https://documenter.getpostman.com/view/8605001/2sAYXFiHWQ)
+## Installation
 
-## **Tech Stack**
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/anwarhossain1/hiublue-frontend-recruitment-starter.git
+   cd hiublue-frontend-recruitment-starter
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+3. Start the development server:
+   ```sh
+   npm run dev
+   # or
+   yarn dev
+   ```
 
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **UI Library:** Material UI (MUI)
-- **Form Handling:** React Hook Form (Use validation like yup or zod)
-- **Charting:** ApexCharts
-- **State Management:** Context API and LocalStorage
-- **Version Control:** GitHub (Fork the repo and maintain clean commits)
-- **Deployment:** Vercel
+## Usage
 
-## **Requirements**
+- Ensure the API routes are correctly configured in `API_ROUTES`.
+- The dashboard fetches data based on the selected time filter.
+- Use the `CustomSelect` component to toggle between different time filters.
+- Data visualization components like `StatCard`, `WebsiteVisit`, and `OffersSent` display relevant information.
 
-### **1. Authentication**
+## Customization
 
-- A login page will be already there, you have to implement the api first.
-- Store authentication state using **Context API and LocalStorage**.
-- Make sure no unauthorized user has access to the dashboard or any other routes.
-- Show different layouts for **authenticated vs. non-authenticated users**.
+- Modify the API endpoints in `API_ROUTES`.
+- Customize table columns inside `OffersTable.tsx`.
+- Adjust the UI by modifying MUI components and styles.
 
-### **2. Admin Dashboard**
+## Tech Stack
 
-- Fetch **real-time data** from the provided API.
-- Display the data in an table with:
-  - Pagination
-  - Searching
-  - Filtering
-- Show **charts** based on API data using **ApexCharts**.
+- React.js (with Next.js structure)
+- Material UI (MUI) for styling and layout
+- Fetch API for data retrieval
 
-### **3. Sending Onboarding Offer**
+## Tradeoffs
 
-- Implement a **separate page** where the admin can send onboarding offers to new users.
-- Allow the admin to **select a user** from a list and fill in additional fields. Do use Mui Autocomplete component. Instead of pulling all users, perform searching using api.
-- Using **React Hook Form** is preferred but not mandatory.
-- Validate the data before submitting using packages like yup and zod.
+- Dashboard has responsiveness issue for the mui table
 
-### **4. Git & Code Structure**
+## License
 
-- Follow a **clean Git workflow** (feature branches, meaningful commit messages).
-- Write **modular, reusable, and well-structured** code.
-- Ensure **proper TypeScript typings** throughout the project.
+This project is licensed under the MIT License.
 
-### **5. Responsive design**
+---
 
-- The application should be responsive, adapting seamlessly to different screen sizes without compromising or design integrity.
-
-### **6. Readme File**
-
-- Include a **README** file that provides clear instructions on how to set up, run and test the application
-
-### **7. Deployment**
-
-- **Deploy the project to Vercel** and provide the link.
-
-## **How to Start**
-
-1. **Fork the starter repository** (link will be provided).
-2. Clone your fork and install dependencies:
-
-```bash
-git clone YOUR_FORKED_REPO
-cd YOUR_PROJECT
-npm install
-```
-
-1. Once completed, **push your changes.**
-
-## **Submission Requirements**
-
-- **GitHub Repository Link** (structured with a README file).
-- **Live Deployment Link**
-
-## **Evaluation Criteria**
-
-| **Category** | **Evaluation Criteria** |
-| --- | --- |
-| **Code Quality** | Readability, structure, component-based approach |
-| **TypeScript Usage** | Proper typing of components, hooks, data types, API responses |
-| **API Handling** | Proper usage of necessary caching, error handling |
-| **UI & UX** | Clean UI, responsiveness, MUI usage, adherence to Figma design. Using MUI is a must. |
-| **Authentication** | Token-based authentication, proper auth state management using Context API & LocalStorage |
-| **Table Features** | Proper implementation of pagination, searching using. |
-| **Form Handling** | Correct usage of React Hook Form and proper validation |
-| **Onboarding Offer** | Ability to select users, send onboarding requests |
-| **Error & Success Messages** | Proper display of validation errors and success messages |
-| **Git Practices** | Clean commits, meaningful messages, proper branching |
-
-## **Deadline**
-
-You have **4 days** to complete this challenge.
-
-Good luck!
+Made with ❤️ by Anwar Hossain
