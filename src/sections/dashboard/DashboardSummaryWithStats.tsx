@@ -1,6 +1,6 @@
 import CustomSelect from "@/components/ui/CustomSelect";
 import { API_ROUTES } from "@/constants/apiRoutes";
-import { Box, Grid2, Typography } from "@mui/material";
+import { Grid2, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import OffersSent from "./OffersSent";
 import StatCard from "./views/StatCard";
@@ -79,49 +79,44 @@ const DashboardSummaryWithStats = () => {
     setSelectedFilter(value);
   };
   return (
-    <Box>
-      <Grid2 container spacing={2} alignItems="center">
-        <Grid2 size={{ xs: 12, sm: 10 }}>
-          <Typography variant="h4" fontWeight={"bold"}>
-            Dashboard
-          </Typography>
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 2 }}>
-          <CustomSelect
-            options={filterData}
-            value={selectedFilter}
-            onChange={handleSelectedFilter}
-          />
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
-          {statCardData && (
-            <StatCard
-              label="Total active users"
-              count={statCardData.active_users}
-            />
-          )}
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
-          {statCardData && (
-            <StatCard label="Total clicks" count={statCardData.clicks} />
-          )}
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
-          {statCardData && (
-            <StatCard
-              label="Total appearances"
-              count={statCardData.appearance}
-            />
-          )}
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
-          {websiteVisits && <WebsiteVisit data={websiteVisits} />}
-        </Grid2>
-        <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
-          {offersSent && <OffersSent data={offersSent} />}
-        </Grid2>
+    <Grid2 container spacing={2} alignItems="center">
+      <Grid2 size={{ xs: 12, sm: 10 }}>
+        <Typography variant="h4" fontWeight={"bold"}>
+          Dashboard
+        </Typography>
       </Grid2>
-    </Box>
+      <Grid2 size={{ xs: 12, sm: 2 }}>
+        <CustomSelect
+          options={filterData}
+          value={selectedFilter}
+          onChange={handleSelectedFilter}
+        />
+      </Grid2>
+      <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
+        {statCardData && (
+          <StatCard
+            label="Total active users"
+            count={statCardData.active_users}
+          />
+        )}
+      </Grid2>
+      <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
+        {statCardData && (
+          <StatCard label="Total clicks" count={statCardData.clicks} />
+        )}
+      </Grid2>
+      <Grid2 size={{ xs: 12, sm: 6, md: 4 }}>
+        {statCardData && (
+          <StatCard label="Total appearances" count={statCardData.appearance} />
+        )}
+      </Grid2>
+      <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
+        {websiteVisits && <WebsiteVisit data={websiteVisits} />}
+      </Grid2>
+      <Grid2 size={{ xs: 12, sm: 12, md: 6 }}>
+        {offersSent && <OffersSent data={offersSent} />}
+      </Grid2>
+    </Grid2>
   );
 };
 

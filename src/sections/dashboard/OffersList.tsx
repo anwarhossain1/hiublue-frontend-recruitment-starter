@@ -91,40 +91,38 @@ const OffersList = () => {
   };
 
   return (
-    <Paper elevation={3}>
-      <Box p={3}>
-        {loading && <LinearProgress />}
-        <Grid2 container spacing={2}>
-          <Grid2 size={{ xs: 12 }}>
-            <Typography variant="h6" fontWeight={"bold"}>
-              Offers List
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 12 }}>
-            <CustomTabs
-              value={currentTab}
-              onChange={handleTabChange}
-              options={tabsData}
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, sm: 6 }}>
-            <CustomSearch value={search} onChange={handleSearchChange} />
-          </Grid2>
-          <Grid2 size={{ xs: 12, sm: 6 }}>
-            <Box sx={{ width: { xs: "100%", sm: "50%" } }}>
-              <CustomSelect
-                options={typeOptions}
-                onChange={handleTypeChange}
-                value={type}
-                label="Type"
-              />
-            </Box>
-          </Grid2>
-          <Grid2 size={{ xs: 12 }}>
-            <OffersTable data={tableData} />
-          </Grid2>
+    <Paper elevation={3} sx={{ p: 3 }}>
+      {loading && <LinearProgress />}
+      <Grid2 container spacing={2}>
+        <Grid2 size={{ xs: 12 }}>
+          <Typography variant="h6" fontWeight={"bold"}>
+            Offers List
+          </Typography>
         </Grid2>
-      </Box>
+        <Grid2 size={{ xs: 12 }}>
+          <CustomTabs
+            value={currentTab}
+            onChange={handleTabChange}
+            options={tabsData}
+          />
+        </Grid2>
+        <Grid2 size={{ xs: 12, sm: 6 }}>
+          <CustomSearch value={search} onChange={handleSearchChange} />
+        </Grid2>
+        <Grid2 size={{ xs: 12, sm: 6 }}>
+          <Box sx={{ width: { xs: "100%", sm: "50%" } }}>
+            <CustomSelect
+              options={typeOptions}
+              onChange={handleTypeChange}
+              value={type}
+              label="Type"
+            />
+          </Box>
+        </Grid2>
+        <Grid2 size={{ xs: 12, md: 12 }}>
+          <OffersTable data={tableData} />
+        </Grid2>
+      </Grid2>
     </Paper>
   );
 };

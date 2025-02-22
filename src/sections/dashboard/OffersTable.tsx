@@ -2,6 +2,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   Alert,
+  Box,
   IconButton,
   Stack,
   Table,
@@ -12,12 +13,13 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+
 const tableHeadColumns = [
-  { id: "user_name", label: "Name", minWidth: 150 },
-  { id: "phone", label: "Phone Number", minWidth: 150 },
-  { id: "company", label: "Company", minWidth: 150 },
-  { id: "jobTitle", label: "Job Title", minWidth: 150 },
-  { id: "type", label: "Type", minWidth: 150 },
+  { id: "user_name", label: "Name", minWidth: 170 },
+  { id: "phone", label: "Phone Number", minWidth: 170 },
+  { id: "company", label: "Company", minWidth: 170 },
+  { id: "jobTitle", label: "Job Title", minWidth: 170 },
+  { id: "type", label: "Type", minWidth: 170 },
   { id: "status", label: "Status", minWidth: 150 },
   { id: "actions", label: "Actions", minWidth: 150 },
 ];
@@ -31,44 +33,41 @@ const OffersTable = ({ data }: { data: any }) => {
     }
     return "error";
   };
+
   return (
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            {tableHeadColumns.map((column) => (
-              <TableCell
-                key={column.id}
-                //   align={column.align}
-                style={{ minWidth: column.minWidth }}
-              >
-                {column.id === "actions" ? "" : column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.length === 0 ? (
+    <Box sx={{ width: "100%", overflowX: "auto" }}>
+      <TableContainer>
+        <Table sx={{ minWidth: 900 }}>
+          <TableHead>
             <TableRow>
-              <TableCell colSpan={7} align="center">
-                No data found
-              </TableCell>
+              {tableHeadColumns.map((column) => (
+                <TableCell key={column.id}>
+                  {column.id === "actions" ? "" : column.label}
+                </TableCell>
+              ))}
             </TableRow>
-          ) : (
-            data.map((row: any) => {
-              return (
+          </TableHead>
+          <TableBody>
+            {data.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  No data found
+                </TableCell>
+              </TableRow>
+            ) : (
+              data.map((row: any) => (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {tableHeadColumns.map((column) => {
+                  {tableHeadColumns.map((column, index) => {
                     const value = row[column.id];
                     return (
                       <TableCell
-                        key={column.id}
+                        key={index}
                         style={{ minWidth: column.minWidth }}
                       >
                         {column.id === "type" && (
                           <Typography
                             variant="body2"
-                            textTransform={"capitalize"}
+                            textTransform="capitalize"
                           >
                             {value}
                           </Typography>
@@ -105,12 +104,12 @@ const OffersTable = ({ data }: { data: any }) => {
                     );
                   })}
                 </TableRow>
-              );
-            })
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 

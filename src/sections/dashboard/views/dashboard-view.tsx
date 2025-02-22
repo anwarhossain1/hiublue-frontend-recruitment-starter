@@ -6,7 +6,7 @@ import OffersList from "../OffersList";
 
 export default function DashboardView() {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={3}>
       <DashboardSummaryWithStats />
       <OffersList />
     </Stack>
