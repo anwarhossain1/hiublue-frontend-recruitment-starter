@@ -37,14 +37,41 @@ const OffersSent: React.FC<OffersSentProps> = ({ data }) => {
       categories: formattedData.map((item) => item.day),
     },
     colors: ["#1C252E"],
-
     responsive: [
+      {
+        breakpoint: 1024,
+        options: {
+          chart: {
+            height: 350,
+            width: "100%",
+          },
+        },
+      },
       {
         breakpoint: 600,
         options: {
           chart: {
             height: 250,
             width: "100%",
+          },
+          xaxis: {
+            labels: {
+              show: false,
+            },
+          },
+        },
+      },
+      {
+        breakpoint: 400,
+        options: {
+          chart: {
+            height: 200,
+            width: "100%",
+          },
+          xaxis: {
+            labels: {
+              show: false,
+            },
           },
         },
       },

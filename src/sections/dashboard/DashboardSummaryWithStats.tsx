@@ -82,12 +82,12 @@ const DashboardSummaryWithStats = () => {
   return (
     <Box>
       <Grid2 container spacing={2} alignItems="center">
-        <Grid2 size={{ xs: 10 }}>
+        <Grid2 size={{ xs: 12, sm: 10 }}>
           <Typography variant="h4" fontWeight={"bold"}>
             Dashboard
           </Typography>
         </Grid2>
-        <Grid2 size={{ xs: 2 }}>
+        <Grid2 size={{ xs: 12, sm: 2 }}>
           <CustomSelect
             options={filterData}
             value={selectedFilter}

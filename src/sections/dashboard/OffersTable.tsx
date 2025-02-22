@@ -32,8 +32,14 @@ const OffersTable = ({ data }: { data: any }) => {
     return "error";
   };
   return (
-    <TableContainer sx={{ minHeight: "50vh" }}>
-      <Table>
+    <TableContainer
+      sx={{
+        minHeight: "50vh",
+        width: "100%",
+        overflow: "auto",
+      }}
+    >
+      <Table sx={{ minWidth: 650, width: "100%" }}>
         <TableHead>
           <TableRow>
             {tableHeadColumns.map((column) => (
