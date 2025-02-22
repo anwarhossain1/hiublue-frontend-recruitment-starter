@@ -3,7 +3,7 @@ export const API_ROUTES = {
     LOGIN: `${process.env.NEXT_PUBLIC_BASE_URL}/login`,
   },
   DASHBOARD: {
-    GET: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard`,
+    SUMMARY: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/summary`,
   },
   ONBOARDING: {
     POST: `${process.env.NEXT_PUBLIC_BASE_URL}/offers`,
