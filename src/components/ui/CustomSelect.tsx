@@ -1,3 +1,4 @@
+import { InputLabel } from "@mui/material";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -5,7 +6,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import * as React from "react";
 
 type CustomSelectProps = {
-  //   label: string;
+  label?: string;
   options: { value: string | number; label: string }[];
   value: string | number;
   onChange: (value: string | number) => void;
@@ -14,7 +15,7 @@ type CustomSelectProps = {
 };
 
 const CustomSelect: React.FC<CustomSelectProps> = ({
-  //   label,
+  label,
   options,
   value,
   onChange,
@@ -28,7 +29,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
   return (
     <Box sx={{ minWidth }}>
       <FormControl fullWidth={fullWidth}>
-        {/* <InputLabel id={`${label}-select-label`}>{label}</InputLabel> */}
+        {label && <InputLabel id={`${label}-select-label`}>{label}</InputLabel>}
         <Select
           labelId={`-select-label`}
           id={`select`}

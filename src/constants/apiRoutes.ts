@@ -4,6 +4,7 @@ export const API_ROUTES = {
   },
   DASHBOARD: {
     SUMMARY: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/summary`,
+    STAT: `${process.env.NEXT_PUBLIC_BASE_URL}/dashboard/stat`,
   },
   ONBOARDING: {
     POST: `${process.env.NEXT_PUBLIC_BASE_URL}/offers`,

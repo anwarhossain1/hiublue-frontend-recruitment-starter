@@ -21,6 +21,21 @@ const fetchDashboardSummary = async (filterBy: string | number) => {
   }
   return data.previous;
 };
+const fetchDashboardStat = async (filterBy: string | number) => {
+  const response = await fetch(
+    `${API_ROUTES.DASHBOARD.STAT}?filter=${filterBy}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
+  const data = await response.json();
+  console.log("stat", data);
+  return data;
+};
 
 const filterData = [
   { label: "This Week", value: "this-week" },
@@ -28,17 +43,36 @@ const filterData = [
 ];
 const DashboardSummaryWithStats = () => {
   const [statCardData, setStatCardData] = useState<any>(null);
+  const [offersSent, setOffersSent] = useState<any>(null);
+  const [websiteVisits, setWebsiteVisits] = useState<any>(null);
   const [selectedFilter, setSelectedFilter] = useState<string | number>(
     filterData[0].value
   );
   useEffect(() => {
     if (selectedFilter) {
       handleDashboardSummary(selectedFilter);
+      handleDashboardStat(selectedFilter);
     }
   }, [selectedFilter]);
   const handleDashboardSummary = async (value: string | number) => {
-    const data = await fetchDashboardSummary(value);
-    setStatCardData(data);
+    try {
+      const data = await fetchDashboardSummary(value);
+      setStatCardData(data);
+    } catch (error) {
+      console.error("Failed to fetch dashboard summary:", error);
+    }
+  };
+  const handleDashboardStat = async (value: string | number) => {
+    try {
+      const data = await fetchDashboardStat(value);
+      if (data) {
+        setOffersSent(data.offers_sent);
+        setWebsiteVisits(data.website_visits);
+      }
+      console.log(data);
+    } catch (error) {
+      console.error("Failed to fetch dashboard summary:", error);
+    }
   };
   const handleSelectedFilter = (value: string | number) => {
     setSelectedFilter(value);
@@ -46,12 +80,12 @@ const DashboardSummaryWithStats = () => {
   return (
     <Box>
       <Grid2 container spacing={2} alignItems="center">
-        <Grid2 size={{ xs: 8 }}>
+        <Grid2 size={{ xs: 10 }}>
           <Typography variant="h4" fontWeight={"bold"}>
             Dashboard
           </Typography>
         </Grid2>
-        <Grid2 size={{ xs: 4 }}>
+        <Grid2 size={{ xs: 2 }}>
           <CustomSelect
             options={filterData}
             value={selectedFilter}
@@ -78,6 +112,12 @@ const DashboardSummaryWithStats = () => {
               count={statCardData.appearance}
             />
           )}
+        </Grid2>
+        <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
+          {websiteVisits && <Typography>Website visit</Typography>}
+        </Grid2>
+        <Grid2 size={{ xs: 12, sm: 6, md: 6 }}>
+          {offersSent && <Typography>Offers sent</Typography>}
         </Grid2>
       </Grid2>
     </Box>

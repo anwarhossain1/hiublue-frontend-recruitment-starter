@@ -40,6 +40,11 @@ const schema = yup.object().shape({
     .positive("Price must be greater than zero")
     .required("Price is required"),
 });
+export const planOptions = [
+  { label: "Pay as you go", value: "pay_as_you_go" },
+  { label: "Monthly", value: "monthly" },
+  { label: "Yearly", value: "yearly" },
+];
 
 export default function OnboardingView() {
   const {
@@ -79,11 +84,7 @@ export default function OnboardingView() {
       console.error(error);
     }
   };
-  const planOptions = [
-    { label: "Pay as you go", value: "pay_as_you_go" },
-    { label: "Monthly", value: "monthly" },
-    { label: "Yearly", value: "yearly" },
-  ];
+
   const additionOptions = [
     { label: "Refundable", value: "refundable" },
     { label: "On Demand", value: "on_demand" },
